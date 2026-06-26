@@ -10,7 +10,12 @@ function MascotaCard({
   adopcionUrgente,
 }) {
   return (
-    <article className="mascota-card">
+    <article className={`mascota-card ${adopcionUrgente ? 'urgente-card' : ''}`}>
+      {adopcionUrgente && (
+        <div className="badge-urgente">
+          <span>⚠️ URGENTE</span>
+        </div>
+      )}
       <h3>{nombre}</h3>
       <p>
         <strong>Raza:</strong> {raza}
@@ -26,7 +31,6 @@ function MascotaCard({
         <strong>Características:</strong>{' '}
         {caracteristicas.length > 0 ? caracteristicas.join(', ') : 'No disponible'}
       </p>
-      {adopcionUrgente && <p className="urgente">Adopción urgente</p>}
     </article>
   )
 }
@@ -52,3 +56,4 @@ MascotaCard.defaultProps = {
 }
 
 export default MascotaCard
+

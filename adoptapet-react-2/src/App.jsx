@@ -30,10 +30,24 @@ function App() {
     return cumpleFiltroEspecie && cumpleBusqueda
   })
 
+  // Contar mascotas con adopción urgente (sin filtros)
+  const mascotasUrgentes = mascotas.filter((mascota) => mascota.adopcionUrgente).length
+
   return (
     <main className="app">
       <h1>Adopta una mascota</h1>
       
+      <div className="header-info">
+        {mascotasUrgentes > 0 && (
+          <div className="contador-urgentes">
+            <span className="icono">⚠️</span>
+            <span className="texto">
+              {mascotasUrgentes} {mascotasUrgentes === 1 ? 'mascota necesita' : 'mascotas necesitan'} adopción urgente
+            </span>
+          </div>
+        )}
+      </div>
+
       <FiltroEspecie 
         filtroSeleccionado={filtroEspecie} 
         onFiltroChange={setFiltroEspecie} 

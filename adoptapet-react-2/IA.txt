@@ -1,0 +1,142 @@
+DOCUMENTACIÓN DE ETAPAS DE DESARROLLO - ADOPTAPET REACT
+
+ETAPA 1: PROYECTO BASE DE DATOS
+
+PROMPT A COPILOT:
+"Importa el array en App.jsx y verifica en consola que carga (console.log). ¿Podrías decirme cómo hacer lo que está en comillas?"
+
+UTILIDAD: Parcialmente útil
+MOTIVO: La IA entendió perfectamente lo que pedía, pero aunque respondió la duda teórica, también tuve que encargarme de importar y configurar el array correctamente en el código. Afortunadamente, la IA lo hizo bien en este punto.
+
+MODIFICACIONES/CORRECCIONES:
+- La IA acertó generando el import de `mascotas` y el useEffect con el console.log.
+- No tocó nada que requiriera corrección; el código funcionó a la primera.
+
+
+ETAPA 2: CREAR COMPONENTE MASCOTACARD CON PROP-TYPES Y VALIDACIÓN
+
+PROMPT A COPILOT:
+"Estoy creando el componente MascotaCard en React y necesito que los datos que recibe (nombre, raza, etc.)
+ sean validados estrictamente usando prop-types. ¿Podrías mostrarme cómo definir los tipos y los valores
+ por defecto (defaultProps) para que la app no falle si falta algún dato? Por favor, asegúrate de no usar 
+ dangerouslySetInnerHTML para mantener el código seguro."
+
+UTILIDAD: Muy útil
+MOTIVO: La IA generó la estructura completa con propTypes y defaultProps exactamente como se necesitaba. Validó los tipos correctamente y, lo más importante, mantuvo el código seguro sin usar métodos peligrosos.
+
+MODIFICACIONES/CORRECCIONES:
+- El resultado fue casi perfecto desde el inicio.
+- Solo tuve que reemplazar el archivo vacío con el contenido generado, sin necesidad de ajustes posteriores.
+
+
+ETAPA 3: RENDERIZADO DE LA LISTA CON KEY
+
+PROMPT A COPILOT:
+"En ListaMascotas.jsx que reciba el array de mascotas por props. Recorre el array con .map() y renderiza 
+un MascotaCard por cada mascota. Asigna correctamente la prop key usando el id de cada elemento
+(no uses el índice del array). En App.jsx, renderiza ListaMascotas pasándole los datos importados."
+
+UTILIDAD: Muy útil
+MOTIVO: La IA creó correctamente el componente ListaMascotas con el destructuring de mascotas en props, la iteración con .map() usando key={mascota.id}, y actualizó App.jsx para pasar los datos importados al componente.
+
+MODIFICACIONES/CORRECCIONES:
+- El código generado fue correcto sin necesidad de ajustes
+- Se implementó correctamente el flujo de props desde App.jsx a ListaMascotas a MascotaCard
+- El uso de key con mascota.id fue exacto como se solicitó
+
+
+ETAPA 4: FILTRO Y BUSQUEDA CONTROLADA
+
+PROMPT A COPILOT:
+"Necesito en este FiltroEspecie.jsx, botones o un selector para filtrar por la 
+especie: 'Todas', 'Perro', 'Gato', 'Otro'. Después en App.jsx, usa useState para 
+guardar el filtro seleccionado y un campo de búsqueda por nombre. Aplica ambos 
+filtros sobre el array antes de pasarlo a ListaMascotas. Usa renderizado condicional 
+para mostrar el mensaje 'No hay mascotas que coincidan' cuando el resultado quede vacío."
+
+UTILIDAD: MUY ÚTIL
+Por qué: La IA dio en el clavo. Generó exactamente la lógica necesaria sin que tuviera que corregir nada mayor. El código quedó bien estructurado, comentado y totalmente funcional.
+
+QUÉ MODIFIQUÉ/CORREGÍ:
+- Nada en la lógica. El código generado fue correcto a la primera.
+- Solo me encargué de agregar los estilos CSS correspondientes en FiltroEspecie.css, lo cual la IA también ayudó a crear correctamente.
+
+RESULTADO:
+- FiltroEspecie.jsx: Componente con 4 botones dinámicos.
+- App.jsx: useState para manejar el filtro y la búsqueda.
+- Lógica de filtrado doble (especie + nombre).
+- Renderizado condicional implementado correctamente.
+- Sin errores.
+
+ETAPA 4: VALIDACIÓN Y NORMALIZACIÓN DE BÚSQUEDA 
+
+PROMPT A COPILOT:
+"El campo de búsqueda debe ser un componente controlado (su valor vive en el 
+estado de React). Valida y normaliza el texto de búsqueda (recorta espacios y 
+limita el largo) antes de usarlo, para no confiar ciegamente en la entrada 
+del usuario. ¿Estas normas se cumplen?"
+
+UTILIDAD: PARCIALMENTE ÚTIL
+Por qué: El campo ya era controlado (✓), pero la IA no detectó que faltaba la normalización explícita, la validación antes de guardar el estado, el límite de caracteres y el contador visual.
+
+QUÉ MODIFIQUÉ/CORREGÍ:
+- Creé la función `normalizarBusqueda()` que:
+  * Usa `.trim()` para limpiar espacios.
+  * Usa `.slice(0, MAX_BUSQUEDA_LENGTH)` para limitar a 50 caracteres.
+- Definí la constante `MAX_BUSQUEDA_LENGTH = 50`.
+- Implementé `handleBusquedaChange()` para normalizar antes de actualizar el estado.
+- Añadí el atributo `maxLength` en el input como medida de seguridad extra.
+- Agregué un contador visual "x/50" y actualicé los estilos CSS para que se vea bien.
+
+RESULTADO:
+ Validación en tiempo real.
+ Normalización automática de la entrada.
+ Límite estricto de 50 caracteres (por input y lógica).
+ Contador visual funcionando.
+ Sin warnings de React.
+
+
+ETAPA 5: RESALTADO URGENTE Y CONTADOR 
+
+PROMPT A COPILOT:
+"1. Resalta visualmente los elementos con adopcionUrgente: true (por ejemplo, 
+una etiqueta 'URGENTE' o un borde distinto).
+2. Agrega un contador que muestre cuántas mascotas tienen adopción urgente.
+3. Verifica que toda la app corre sin errores ni warnings en consola."
+
+UTILIDAD: MUY ÚTIL
+Por qué: La IA propuso soluciones visuales muy bien estructuradas: un badge con emoji, un contador con lógica correcta y la aplicación de clases CSS de forma adecuada.
+
+QUÉ MODIFIQUÉ/CORREGÍ:
+- En MascotaCard.jsx:
+  * Cambié la estructura del renderizado urgente. En lugar de un simple párrafo con clase, agregué un badge posicionado absolutamente.
+  * Renombré la lógica para aplicar la clase "urgente-card" al artículo principal.
+  * Eliminé el viejo párrafo que mostraba "Adopción urgente".
+- En App.jsx:
+  * Calculé `mascotasUrgentes` filtrando el array completo (sin considerar los filtros activos).
+  * Creé la sección "header-info" con el contador dinámico.
+  * Ajusté el texto para que sea gramaticalmente correcto: "X mascota necesita" vs "X mascotas necesitan".
+- En App.css:
+  * Estilos para `.header-info` y `.contador-urgentes`.
+  * Clases para `.mascota-card.urgente-card` (bordes y fondo rosa).
+  * Estilos para el `.badge-urgente` (posición absoluta).
+  * Mejoré las transiciones y efectos hover.
+
+VERIFICACIÓN:
+- Terminal de Vite: 0 errores.
+- Consola del navegador: 0 errores, 0 warnings.
+- ESLint: sin problemas.
+- Testeo manual:
+  - Filtrado por especie: funciona.
+  - Búsqueda por nombre: funciona.
+  - Renderizado condicional: funciona.
+  - Mascotas urgentes destacadas: funciona (4 mascotas).
+  - Contador actualizado dinámicamente: funciona.
+
+RESULTADO:
+- 4 mascotas marcadas como urgentes (Rocky, Toby, Simba, Kira).
+- Contador visible al inicio de la app.
+- Badge en cada tarjeta urgente.
+- Estilos visuales diferenciados.
+- Sin errores de compilación.
+- App 100% funcional.
