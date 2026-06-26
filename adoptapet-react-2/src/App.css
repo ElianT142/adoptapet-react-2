@@ -56,3 +56,47 @@ h1 {
   color: #b91c1c;
   font-weight: 700;
 }
+
+.buscador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  gap: 0.75rem;
+}
+
+.input-busqueda {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-busqueda:focus {
+  border-color: #ff6b6b;
+}
+
+.input-busqueda::placeholder {
+  color: #999;
+}
+
+.contador-busqueda {
+  font-size: 0.85rem;
+  color: #999;
+  white-space: nowrap;
+}
+
+.sin-resultados {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #666;
+}
+
+.sin-resultados p {
+  font-size: 1.1rem;
+  margin: 0;
+}
